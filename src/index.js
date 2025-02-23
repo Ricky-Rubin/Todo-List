@@ -1,4 +1,4 @@
 import "./styles.css"
-import { greet } from "./todo.js";
+import { fillDiv } from "./todo.js"
 
-console.log(greet);
+console.log(fillDiv());
