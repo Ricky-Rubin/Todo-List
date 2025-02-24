@@ -40,10 +40,25 @@ function fillDiv() {
     sendBtn.className = "send-btn";
     sendBtn.textContent = "Add ToDo";
 
+    const todoTab = document.createElement('div');
+    todoTab.className = "todo-tab";
+    todoTab.setAttribute("id", "todo-tab");
+
+    const titleArea = document.createElement('p');
+    const descArea = document.createElement('p');
+    const reminderArea = document.createElement('p');
+
     sendBtn.addEventListener("click", () => {
         const newTask = new Task(addTitle.value, addDesc.value, addReminder.value);
         console.log(newTask);
         [addTitle, addDesc, addReminder].forEach((one) => one.value = "");
+        titleArea.textContent = newTask.title;
+        descArea.textContent = newTask.description;
+        reminderArea.textContent = newTask.reminder;
+        todoTab.append(titleArea, descArea, reminderArea);
+
+        content.innerHTML = "";
+        content.appendChild(todoTab);
     })
 
     formHouse.append(titleLabel, addTitle, descLabel, addDesc, reminderLabel, addReminder, sendBtn);
