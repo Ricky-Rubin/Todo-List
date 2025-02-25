@@ -1,3 +1,4 @@
 import "./styles.css"
-import {  } from "./todo.js"
+import { fillContent } from "./todo.js"
 
+console.log(fillContent());
