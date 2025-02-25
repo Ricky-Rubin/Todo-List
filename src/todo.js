@@ -46,11 +46,41 @@ function fillContent() {
     topTextOne.className = 'top-text-one';   //This is the Todo text that will show on the landing
     topTextOne.textContent = 'Todo';        // It will be at the top of teh left pane.
 
-    const addProject = document.createElement('button'); 
+    const addProject = document.createElement('button'); //Button to create new project
     addProject.className = 'project'                  
     addProject.textContent = '+ Add Project'
 
     navPane.append(topTextOne, addProject);
+
+    addProject.addEventListener('click', () => {
+        const projectTab = document.createElement('div');
+        projectTab.className = 'project-tab';
+        projectTab.innerHTML = `
+            <input class='p-name' type='text'/>
+            <button class='btn mark'>&#10004;</button>
+            <button class='btn cancel'>&#10006;</button>
+        `;
+
+        navPane.appendChild(projectTab);
+
+        const pName = projectTab.querySelector('.p-name');
+
+        const cancelBtn = projectTab.querySelector('.cancel');
+        cancelBtn.addEventListener('click', () => {
+            navPane.removeChild(projectTab)
+        });
+
+        const markBtn = projectTab.querySelector('.mark');
+        markBtn.addEventListener('click', () => {
+            projectTab.innerHTML = ""
+            projectTab.style.backgroundColor = 'pink';
+            
+            projectTab.innerHTML += `
+                <p>${pName.value}</p>
+                <button class='p-cancel'>&#10006;</button>
+            `;
+        })
+    })
 }
 
 
