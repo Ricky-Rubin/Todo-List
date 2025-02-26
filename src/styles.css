@@ -28,6 +28,7 @@ body {
 #right {
   width: calc(100% - 22%);
   border-left: 2px solid pink;
+  padding: 20px 16px 0px 16px;
 }
 
 .top-text-one {
@@ -47,6 +48,7 @@ body {
   background-color: #dcdde1;
   border: none;
   transition: background-color 0.3s ease;
+  margin-bottom: 5px;
 }
 
 .project:active {
@@ -98,4 +100,62 @@ body {
 .cancel {
   color: #dc3545;
   font-size: 16px;
+}
+
+.project-cancel {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.project-cancel:hover {
+  font-size: 19px;
+  color: #dc3545;
+}
+
+.top-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px solid pink;
+  padding: 0px 10px;
+}
+
+.top-task {
+  font-size: 45px;
+  font-weight: 700;
+  font-family: 'Pacifico', cursive;
+}
+
+.add-task {
+  width: 150px;
+  height: 38px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  /* display: none; */
+}
+
+.add-task:active {
+  background-color: #C0C0C0;
+}
+
+.slide-form {
+  position: fixed;
+  top: 99px;
+  right: -300px;
+  width: 300px;
+  border: 4px solid pink;
+  height: 100%;
+  background-color: white;
+  transition: right 0.6s ease;
+}
+
+.closeBtn {
+  display: flex;
+  justify-content: flex-end;
 }

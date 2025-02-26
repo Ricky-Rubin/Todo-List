@@ -74,12 +74,50 @@ function fillContent() {
         markBtn.addEventListener('click', () => {
             projectTab.innerHTML = ""
             projectTab.style.backgroundColor = 'pink';
+            projectTab.style.padding = '0px 8px'
+            projectTab.style.fontSize = '14px'
+            projectTab.style.fontWeight = '600'
             
             projectTab.innerHTML += `
                 <p>${pName.value}</p>
-                <button class='p-cancel'>&#10006;</button>
+                <button class='project-cancel'>&#10006;</button>
             `;
+
+            const projectCancel = projectTab.querySelector('.project-cancel');
+            projectCancel.addEventListener('click', () => {
+                projectTab.remove();
+            })
         })
+    })
+
+    const topName = document.createElement('div');
+    topName.className = 'top-name';
+    topName.innerHTML = `
+        <p class='top-task'>Tasks: </p>
+        <button class='add-task'>Add Task</button>
+    `;
+
+    contentPane.append(topName);
+
+    const slideForm = document.createElement('div');
+    slideForm.className = 'slide-form';
+
+    contentPane.appendChild(slideForm)
+
+    const slideButton = topName.querySelector('.add-task');
+    slideButton.addEventListener('click', () => {
+        console.log('Clicked');
+        slideForm.style.right = '0';
+    })
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'closeBtn';
+    closeBtn.textContent = 'Close';
+
+    slideForm.append(closeBtn);
+
+    closeBtn.addEventListener('click', () => {
+        slideForm.style.right = '-300px'
     })
 }
 
