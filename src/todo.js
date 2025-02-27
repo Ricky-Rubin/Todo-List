@@ -17,6 +17,7 @@ function fillContent() {
     const titleLabel = document.createElement('label');
     titleLabel.textContent = "Title: ";
     titleLabel.setAttribute("for", "addTitle")
+    titleLabel.className = 'labe1'
 
     const addTitle = document.createElement('input');
     addTitle.setAttribute("id", "addTitle");
@@ -25,14 +26,17 @@ function fillContent() {
     const descLabel = document.createElement('label');
     descLabel.textContent = "Description: ";
     descLabel.setAttribute("for", "addDesc")
+    descLabel.className = 'labe2'
 
-    const addDesc = document.createElement('input');
+    const addDesc = document.createElement('textarea');
     addDesc.setAttribute("id", "addDesc");
     addDesc.setAttribute("required", "");
+    addDesc.setAttribute("rows", "4")
 
     const reminderLabel = document.createElement('label');
     reminderLabel.textContent = "Reminder: ";
     reminderLabel.setAttribute("for", "addReminder");
+    reminderLabel.className = 'labe3';
 
     const addReminder = document.createElement('input');
     addReminder.setAttribute("id", "addReminder");
@@ -110,15 +114,18 @@ function fillContent() {
         slideForm.style.right = '0';
     })
 
-    const closeBtn = document.createElement('button');
+    const closeBtn = document.createElement('div');
     closeBtn.className = 'closeBtn';
-    closeBtn.textContent = 'Close';
+    closeBtn.innerHTML = `<button class='x-mark'>&#10006;</button>`;
 
     slideForm.append(closeBtn);
 
     closeBtn.addEventListener('click', () => {
         slideForm.style.right = '-300px'
     })
+
+    formHouse.append(titleLabel, addTitle, descLabel, addDesc, reminderLabel, addReminder);
+    slideForm.appendChild(formHouse)
 }
 
 
