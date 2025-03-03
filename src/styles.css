@@ -90,6 +90,10 @@ body {
   cursor: pointer;
 }
 
+.tab-house p {
+  line-height: 1;
+}
+
 .btn {
   width: 18%;
   height: 32px;
@@ -274,6 +278,5 @@ textarea {
 
 .content-area {
   width: 100%;
-  /* border: 2px solid black; */
-  padding: 5px 5px;
+  padding: 20px 5px;
 }
