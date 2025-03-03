@@ -4,10 +4,12 @@ const contentPane = document.querySelector('#right');
 
 function fillContent() {
     class Task {
-        constructor(title, description, reminder) {
+        constructor(title, description, reminder, date, urgency) {
             this.title = title,
             this.description = description,
-            this.reminder = reminder
+            this.reminder = reminder,
+            this.date = date,
+            this.urgency = urgency
         };
     ;}
 
@@ -188,8 +190,12 @@ function fillContent() {
     formHouse.append(topTextTwo, titleLabel, addTitle, descLabel, addDesc, reminderLabel, addReminder, dateLabel, dateTab, selectLabel, selectOptions, sendBtn);
     slideForm.appendChild(formHouse)
 
+    const contentArea = document.createElement('div')
+    contentArea.className = 'content-area'
+    contentPane.appendChild(contentArea);
+
     sendBtn.addEventListener('click', () => {
-        const newTask = new Task(addTitle.value, addDesc.value, addReminder.value);
+        const newTask = new Task(addTitle.value, addDesc.value, addReminder.value, dateTab.value, selectOptions.value);
         console.log(newTask);
 
         const todoDiv = document.createElement('div');
@@ -197,19 +203,21 @@ function fillContent() {
         todoDiv.setAttribute("id", "todo-div");
 
         const titleArea = document.createElement('p');
-        titleArea.textContent = newTask.title;
+        titleArea.innerHTML = `<span class='before'>Title: </span>${newTask.title}`;
 
         const descArea = document.createElement('p');
-        descArea.textContent = newTask.description;
+        descArea.innerHTML = `<span class='before'>Description: </span>${newTask.description}`;
 
         const reminderArea = document.createElement('p');
-        reminderArea.textContent = newTask.reminder;
+        reminderArea.innerHTML = `<span class='before'>Reminder: </span>${newTask.reminder}`;
 
-        todoDiv.append(titleArea, descArea, reminderArea);
+        const dateArea = document.createElement('p');
+        dateArea.innerHTML = `<span class='before'>Date: </span>${newTask.date}`
 
-        const contentArea = document.createElement('div')
-        contentArea.className = 'content-area'
-        contentPane.appendChild(contentArea);
+        const urgencyArea = document.createElement('p');
+        urgencyArea.innerHTML = `<span class='before'>Urgency: </span>${newTask.urgency}`
+
+        todoDiv.append(titleArea, descArea, reminderArea, dateArea, urgencyArea);
 
         contentArea.appendChild(todoDiv);
         slideForm.style.right = '-300px'

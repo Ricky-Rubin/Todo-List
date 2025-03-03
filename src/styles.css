@@ -278,18 +278,26 @@ textarea {
 }
 
 .todo-div {
-  width: 240px;
-  border: 1px solid black;
+  width: 230px;
+  border: 3px solid black;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  margin: 0px 12px 20px 12px;
+  font-size: 13px;
+  text-align: center;
+  padding: 5px 10px;
 }
 
 .content-area {
   width: 100%;
-  padding: 20px 5px;
+  padding: 20px 0px 20px 6px;
   display: flex;
-  flex-direction: row;
-  z-index: 0;
+  flex-wrap: wrap;
+}
+
+.before {
+  font-size: 13px;
+  font-weight: 700;
+  display: block;
 }
