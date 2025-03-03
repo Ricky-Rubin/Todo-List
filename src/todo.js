@@ -211,7 +211,8 @@ function fillContent() {
         contentArea.className = 'content-area'
         contentPane.appendChild(contentArea);
 
-        contentArea.appendChild(todoTab);
+        contentArea.appendChild(todoDiv);
+        slideForm.style.right = '-300px'
     })
 }
 
