@@ -205,7 +205,7 @@ function fillContent() {
         const reminderArea = document.createElement('p');
         reminderArea.textContent = newTask.reminder;
 
-        todoTab.append(titleArea, descArea, reminderArea);
+        todoDiv.append(titleArea, descArea, reminderArea);
 
         const contentArea = document.createElement('div')
         contentArea.className = 'content-area'
