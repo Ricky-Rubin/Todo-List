@@ -1,6 +1,7 @@
 const container = document.querySelector('#container')
 const navPane = document.querySelector('#left');
 const contentPane = document.querySelector('#right');
+let selectedDiv = null;
 
 function fillContent() {
     class Task {
@@ -133,10 +134,15 @@ function fillContent() {
                 })
 
                 const tabHouse = projectTab.querySelector('.tab-house');
-                    tabHouse.addEventListener('click', () => {
-                    console.log("div clicked");
-                    projectTab.style.backgroundColor = "#dff9fb";
+                tabHouse.addEventListener('click', () => {
                     slideButton.style.display = 'block';
+
+                    if (selectedDiv) {
+                        selectedDiv.style.backgroundColor = 'pink';
+                    }
+                    
+                    projectTab.style.backgroundColor = '#dff9fb';
+                    selectedDiv = projectTab;
                 })
 
                 const projectCancel = projectTab.querySelector('.cancel-house');
@@ -217,12 +223,40 @@ function fillContent() {
         const urgencyArea = document.createElement('p');
         urgencyArea.innerHTML = `<span class='before'>Urgency: </span>${newTask.urgency}`
 
-        todoDiv.append(titleArea, descArea, reminderArea, dateArea, urgencyArea);
+        const tabBtn = document.createElement('div');
+        tabBtn.className = 'tab-btn';
+        tabBtn.innerHTML = `
+            <button class='tab done'>Task Done</button>
+            <button class='tab remove'>Remove Task</button>
+        `;
+
+        const taskDone = tabBtn.querySelector('.done');
+        taskDone.addEventListener('click', () => {
+            if (taskDone.textContent === 'Undo') {
+                todoDiv.style.borderColor = "black";
+                taskDone.textContent = 'Task Done';
+            } else {
+                todoDiv.style.borderColor = "#28a745";
+                taskDone.textContent = 'Undo';
+            }
+        })
+
+        const removeTask = tabBtn.querySelector('.remove');
+        removeTask.addEventListener('click', () => {
+            todoDiv.remove();
+        })
+
+        todoDiv.append(titleArea, descArea, reminderArea, dateArea, urgencyArea, tabBtn);
 
         contentArea.appendChild(todoDiv);
         slideForm.style.right = '-300px'
+
+        addTitle.value = '';
+        addDesc.value = '';
+        addReminder.value = '';
+        dateTab.value = '';
+        selectOptions.value = '';
     })
 }
-
 
 export { fillContent }
