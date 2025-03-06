@@ -88,6 +88,8 @@ function fillContent() {
 
     navPane.append(topTextOne, addProject);
 
+    const tabItems = {};
+
     addProject.addEventListener('click', () => {
         const projectTab = document.createElement('div');
         projectTab.className = 'project-tab';
@@ -140,8 +142,8 @@ function fillContent() {
                     if (selectedDiv) {
                         selectedDiv.style.backgroundColor = 'pink';
                     }
-                    
-                    projectTab.style.backgroundColor = '#dff9fb';
+                    // #dff9fb 70a1ff #58B19F 7bed9f 67e6dc
+                    projectTab.style.backgroundColor = '#58B19F';
                     selectedDiv = projectTab;
                 })
 
