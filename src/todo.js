@@ -88,7 +88,11 @@ function fillContent() {
 
     navPane.append(topTextOne, addProject);
 
-    const tabItems = {};
+    const projectTasks = {};    //added
+
+    const contentContainer = document.createElement('div');
+    contentContainer.className = 'content-container';
+    // contentPane.appendChild(contentContainer)               //added
 
     addProject.addEventListener('click', () => {
         const projectTab = document.createElement('div');
@@ -112,6 +116,18 @@ function fillContent() {
 
         function setProjectName() {
             if (pName.value.trim() !== "") {
+                const projectId = 'project-' + Date.now();
+                projectTab.dataset.projectId = projectId;       //added
+
+                const contentArea = document.createElement('div');
+                contentArea.className = 'content-area';
+                contentArea.id = projectId;
+                
+                contentArea.style.display = 'none';
+                contentContainer.appendChild(contentArea);      //added
+
+                projectTasks[projectId] = [];                   //added
+
                 projectTab.innerHTML = ""
                 projectTab.style.backgroundColor = 'pink';
                 projectTab.style.padding = '0px 8px'
@@ -141,16 +157,39 @@ function fillContent() {
 
                     if (selectedDiv) {
                         selectedDiv.style.backgroundColor = 'pink';
-                    }
-                    // #dff9fb 70a1ff #58B19F 7bed9f 67e6dc
-                    projectTab.style.backgroundColor = '#58B19F';
+
+                        if (selectedDiv.dataset.projectId) {
+                            const prevContentArea = document.getElementById(selectedDiv.dataset.projectId);
+                            if (prevContentArea) {
+                                prevContentArea.style.display = 'none';
+                            }
+                        }                               //added
+                    }                                              
+                    
+                    projectTab.style.backgroundColor = '#f7f1e3';
                     selectedDiv = projectTab;
+
+                    const currentContentArea = document.getElementById(projectId);
+                    if (currentContentArea) {
+                        currentContentArea.style.display = 'flex';
+                    }                                               //added
                 })
 
                 const projectCancel = projectTab.querySelector('.cancel-house');
                 projectCancel.addEventListener('click', () => {
+                    const contentToRemove = document.getElementById(projectId);
+                    if (contentToRemove) {
+                        contentContainer.removeChild(contentToRemove);
+                    }                                               //added
+
+                    delete projectTasks[projectId];                 //added
+                    
                     projectTab.remove();
                     slideButton.style.display = 'none'
+
+                    if (selectedDiv === projectTab) {
+                        selectedDiv = null;
+                    }                                               //added
                 })
             } else {
                 alert ("You need to fill the input section!")
@@ -173,6 +212,7 @@ function fillContent() {
     `;                   
      
     contentPane.append(topName);
+    contentPane.appendChild(contentContainer)
 
     const slideForm = document.createElement('div');
     slideForm.className = 'slide-form';
@@ -180,6 +220,9 @@ function fillContent() {
     contentPane.appendChild(slideForm);
 
     const slideButton = topName.querySelector('.add-task');
+
+    slideButton.style.display = 'none'              //added
+
     slideButton.addEventListener('click', () => {
         console.log('Clicked');
         slideForm.style.right = '0';
@@ -198,13 +241,28 @@ function fillContent() {
     formHouse.append(topTextTwo, titleLabel, addTitle, descLabel, addDesc, reminderLabel, addReminder, dateLabel, dateTab, selectLabel, selectOptions, sendBtn);
     slideForm.appendChild(formHouse)
 
-    const contentArea = document.createElement('div')
-    contentArea.className = 'content-area'
-    contentPane.appendChild(contentArea);
+    // const contentArea = document.createElement('div')
+    // contentArea.className = 'content-area'
+    // contentPane.appendChild(contentArea);
 
     sendBtn.addEventListener('click', () => {
+        if (!selectedDiv || !selectedDiv.dataset.projectId) {
+            alert('Please select a project first!');
+            return 
+        }                                       //added
+
+        const projectId = selectedDiv.dataset.projectId;
+        const contentArea = document.getElementById(projectId);         //added
+
+        if (!contentArea) {
+            console.error('Content area not found for project:', projectId);
+            return;
+        }
+
         const newTask = new Task(addTitle.value, addDesc.value, addReminder.value, dateTab.value, selectOptions.value);
         console.log(newTask);
+
+        projectTasks[projectId].push(newTask);                  //added
 
         const todoDiv = document.createElement('div');
         todoDiv.className = 'todo-div';
@@ -245,6 +303,11 @@ function fillContent() {
 
         const removeTask = tabBtn.querySelector('.remove');
         removeTask.addEventListener('click', () => {
+            const taskIndex = Array.from(contentArea.children).indexOf(todoDiv);
+            if (taskIndex !== -1) {
+                projectTasks[projectId].splice(taskIndex, 1);
+            }
+
             todoDiv.remove();
         })
 

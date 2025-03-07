@@ -155,6 +155,14 @@ body {
   background-color: white;
 }
 
+/* .content-container {
+  border: 3px solid;
+} */
+
+/* .content-area {
+  display: flex;
+  border: 3px solid blue;
+} */
 
 .top-task {
   font-size: 45px;
