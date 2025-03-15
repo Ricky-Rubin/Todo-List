@@ -2,6 +2,11 @@ const container = document.querySelector('#container')
 const navPane = document.querySelector('#left');
 const contentPane = document.querySelector('#right');
 let selectedDiv = null;
+let projectTasks = {};
+
+const contentContainer = document.createElement('div');
+contentContainer.className = 'content-container';
+contentPane.appendChild(contentContainer);
 
 function fillContent() {
     class Task {
@@ -64,7 +69,7 @@ function fillContent() {
     selectOptions.className = 'select-options';
     selectOptions.setAttribute("id", "selectOption");
     selectOptions.innerHTML = `
-        <option default disabled>Choose</option>
+        <option selected disabled>Choose</option>
         <option>Low</option>
         <option>Medium</option>
         <option>High</option>
@@ -92,7 +97,7 @@ function fillContent() {
 
     const contentContainer = document.createElement('div');
     contentContainer.className = 'content-container';
-    // contentPane.appendChild(contentContainer)               //added
+    contentPane.appendChild(contentContainer)               //added
 
     addProject.addEventListener('click', () => {
         const projectTab = document.createElement('div');
@@ -133,12 +138,11 @@ function fillContent() {
                 projectTab.style.padding = '0px 8px'
                 projectTab.style.fontSize = '14px'
                 projectTab.style.fontWeight = '600'
-
                 projectTab.innerHTML += `
                 <div class='tab-house'>
                     <p>${pName.value}</p>
                 </div>
-
+                
                 <div class='cancel-house'>
                     <button class='project-cancel'>&#10006;</button>
                 </div>
@@ -297,7 +301,7 @@ function fillContent() {
                 taskDone.textContent = 'Task Done';
             } else {
                 todoDiv.style.borderColor = "#28a745";
-                taskDone.textContent = 'Undo';
+                taskDone.textContent = 'Undo';projectTasks
             }
         })
 
