@@ -17,7 +17,7 @@ function fillContent() {
             this.date = date,
             this.urgency = urgency
         };
-    ;}
+    };
 
     const formHouse = document.createElement('div');
     formHouse.className = "form-house";
@@ -93,7 +93,7 @@ function fillContent() {
 
     navPane.append(topTextOne, addProject);
 
-    const projectTasks = {};    //added
+    // const projectTasks = {};    //added
 
     const contentContainer = document.createElement('div');
     contentContainer.className = 'content-container';
