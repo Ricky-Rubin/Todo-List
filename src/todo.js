@@ -4,6 +4,141 @@ const contentPane = document.querySelector('#right');
 let selectedDiv = null;
 let projectTasks = {};
 
+window.onload = () => {
+    const savedProjects = JSON.parse(localStorage.getItem('divs')) || [];
+    
+    if (Object.keys(savedProjects).length === 0) {
+        console.log("No data present");
+        return;
+    }
+
+    for (const projectId in savedProjects) {
+        if (savedProjects.hasOwnProperty(projectId)) {
+            const tasks = savedProjects[projectId];
+
+            // Recreate project UI
+            const projectTab = document.createElement('div');
+            projectTab.className = 'project-tab';
+            projectTab.dataset.projectId = projectId;
+            projectTab.innerHTML = `
+                <div class='tab-house'>
+                    <p>${projectId.replace('project-', '')}</p>
+                </div>
+                <div class='cancel-house'>
+                    <button class='project-cancel'>&#10006;</button>
+                </div>
+            `;
+
+            navPane.appendChild(projectTab);
+
+            // Create corresponding content area
+            const contentArea = document.createElement('div');
+            contentArea.className = 'content-area';
+            contentArea.id = projectId;
+            contentArea.style.display = 'none';
+            contentContainer.appendChild(contentArea);
+
+            projectTasks[projectId] = [];
+
+            // Loop through and add each saved task
+            tasks.forEach(task => {
+                const todoDiv = document.createElement('div');
+                todoDiv.className = 'todo-div';
+
+                todoDiv.innerHTML = `
+                    <p><span class='before'>Title: </span>${task.title}</p>
+                    <p><span class='before'>Description: </span>${task.description}</p>
+                    <p><span class='before'>Reminder: </span>${task.reminder}</p>
+                    <p><span class='before'>Date: </span>${task.date}</p>
+                    <p><span class='before'>Urgency: </span>${task.urgency}</p>
+                    <div class='tab-btn'>
+                        <button class='tab done'>Task Done</button>
+                        <button class='tab remove'>Remove Task</button>
+                    </div>
+                `;
+
+                const taskDone = todoDiv.querySelector('.done');
+                taskDone.addEventListener('click', () => {
+                    if (taskDone.textContent === 'Undo') {
+                        todoDiv.style.borderColor = "black";
+                        taskDone.textContent = 'Task Done';
+                    } else {
+                        todoDiv.style.borderColor = "#28a745";
+                        taskDone.textContent = 'Undo';
+                    }
+                });
+
+                const removeTask = todoDiv.querySelector('.remove');
+                removeTask.addEventListener('click', () => {
+                    const taskIndex = projectTasks[projectId].indexOf(task);
+                    if (taskIndex !== -1) {
+                        projectTasks[projectId].splice(taskIndex, 1);
+                        localStorage.setItem('divs', JSON.stringify(projectTasks));
+                    }
+                    todoDiv.remove();
+                });
+
+                contentArea.appendChild(todoDiv);
+                projectTasks[projectId].push(task);
+            });
+
+            // Add event listeners for project selection
+            projectTab.querySelector('.tab-house').addEventListener('click', () => {
+                if (selectedDiv) {
+                    selectedDiv.style.backgroundColor = 'pink';
+                    if (selectedDiv.dataset.projectId) {
+                        const prevContentArea = document.getElementById(selectedDiv.dataset.projectId);
+                        if (prevContentArea) {
+                            prevContentArea.style.display = 'none';
+                        }
+                    }
+                }
+
+                projectTab.style.backgroundColor = '#f7f1e3';
+                selectedDiv = projectTab;
+                const currentContentArea = document.getElementById(projectId);
+                if (currentContentArea) {
+                    currentContentArea.style.display = 'flex';
+                }
+            });
+        }
+    }
+
+    document.querySelectorAll('.project-tab').forEach((tab) => {
+        tab.style.backgroundColor = 'pink'; // Default unselected color
+        tab.style.fontWeight = '600';
+        tab.style.padding = '0px 8px';
+        tab.style.fontSize = '14px'
+
+        const cancelBtn = tab.querySelector('.project-cancel');
+        cancelBtn?.addEventListener('click', () => {
+            const projectId = tab.dataset.projectId;
+            const contentToRemove = document.getElementById(projectId);
+
+            if (contentToRemove) {
+                contentToRemove.remove(); // Remove the associated task container
+            }
+
+            delete projectTasks[projectId]; // Remove from projectTasks object
+            localStorage.setItem('divs', JSON.stringify(projectTasks)); // Update localStorage
+
+            tab.remove(); // Remove project tab from the UI
+        });
+    });
+
+    const firstProjectTab = document.querySelector('.project-tab');
+    if (firstProjectTab) {
+        firstProjectTab.style.backgroundColor = '#f7f1e3'; // Apply selected styling
+        selectedDiv = firstProjectTab;
+
+        const firstProjectId = firstProjectTab.dataset.projectId;
+        const firstContentArea = document.getElementById(firstProjectId);
+        if (firstContentArea) {
+            firstContentArea.style.display = 'flex'; // Show first project's tasks
+        }
+    }
+}
+
 const contentContainer = document.createElement('div');
 contentContainer.className = 'content-container';
 contentPane.appendChild(contentContainer);
@@ -95,9 +230,9 @@ function fillContent() {
 
     // const projectTasks = {};    //added
 
-    const contentContainer = document.createElement('div');
-    contentContainer.className = 'content-container';
-    contentPane.appendChild(contentContainer)               //added
+    // const contentContainer = document.createElement('div');
+    // contentContainer.className = 'content-container';
+    // contentPane.appendChild(contentContainer)               //added
 
     addProject.addEventListener('click', () => {
         const projectTab = document.createElement('div');
@@ -121,7 +256,8 @@ function fillContent() {
 
         function setProjectName() {
             if (pName.value.trim() !== "") {
-                const projectId = 'project-' + Date.now();
+                // const projectId = 'project-' + Date.now();
+                const projectId = pName.value;
                 projectTab.dataset.projectId = projectId;       //added
 
                 const contentArea = document.createElement('div');
@@ -250,6 +386,7 @@ function fillContent() {
     // contentPane.appendChild(contentArea);
 
     sendBtn.addEventListener('click', () => {
+        // console.log(projectTasks);
         if (!selectedDiv || !selectedDiv.dataset.projectId) {
             alert('Please select a project first!');
             return 
@@ -264,7 +401,7 @@ function fillContent() {
         }
 
         const newTask = new Task(addTitle.value, addDesc.value, addReminder.value, dateTab.value, selectOptions.value);
-        console.log(newTask);
+        // console.log(newTask);
 
         projectTasks[projectId].push(newTask);                  //added
 
@@ -325,6 +462,8 @@ function fillContent() {
         addReminder.value = '';
         dateTab.value = '';
         selectOptions.value = '';
+
+        localStorage.setItem('divs', JSON.stringify(projectTasks));
     })
 }
 

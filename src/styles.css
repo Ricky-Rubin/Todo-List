@@ -335,3 +335,73 @@ textarea {
 .tab:active {
   background-color: #C0C0C0;
 }
+
+@media (max-width: 575px) {
+  #left {
+    width: 32%;
+    padding: 10px 7px 0px 7px;
+  };
+
+  #right {
+    width: calc(100% - 32%);
+    position: absolute;
+    left: 32%;
+    border-left: 3px solid black;
+  }
+
+  .top-text-one,
+  .top-task {
+    font-size: 25px;
+  }
+  
+  .top-text-one {
+    padding-left: 10px;
+  }
+
+  .add-task {
+    width: 70px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .tab-house {
+    font-size: 10px;
+  }
+
+  .project-tab {
+    height: 27px;
+  }
+
+  .top-name {
+    padding: 10px 10px 0px 25px;
+  }
+
+  .project {
+    height: 27px;
+    font-size: 10px;
+  }
+
+  .project-cancel {
+    font-size: 9px;
+    transition: all 0.3s ease;
+  }
+
+  .project-cancel:hover {
+    font-size: 11px;
+    color: #dc3545;
+  }
+
+  .content-area {
+    padding-left: 16px;
+  }
+
+  .slide-form {
+    top: 54px;
+    width: calc(100% - 32%)
+  }
+
+  #addTitle,
+  #addReminder {
+    font-size: 9px;
+  }
+}
