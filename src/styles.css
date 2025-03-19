@@ -336,17 +336,20 @@ textarea {
   background-color: #C0C0C0;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 600px) {
+  #right {
+    padding: 10px 7px 0px 7px;
+    width: 68%;
+    margin-left: 10%;
+  }
+
   #left {
     width: 32%;
     padding: 10px 7px 0px 7px;
-  };
+  }
 
-  #right {
-    width: calc(100% - 32%);
-    position: absolute;
-    left: 32%;
-    border-left: 3px solid black;
+  .content-area {
+    /* padding: 20px 0px 20px 0px; */
   }
 
   .top-text-one,
@@ -372,14 +375,8 @@ textarea {
     height: 27px;
   }
 
-  .mark,
-  .cancel {
-    display: flex;
-    flex-direction: column;
-  }
-
   .top-name {
-    padding: 10px 10px 0px 25px;
+    padding: 10px 10px 0px 5px;
   }
 
   .project {
@@ -397,17 +394,14 @@ textarea {
     color: #dc3545;
   }
 
-  .content-area {
-    padding-left: 16px;
-  }
-
   .slide-form {
     top: 54px;
-    width: calc(100% - 32%)
+    width: calc(100% - 32%);
   }
 
   .todo-div {
     font-size: 10px;
+    margin: 0px 8px 12px 3px;
   }
 
   .before {
@@ -463,18 +457,3 @@ textarea {
     font-size: 10px;
   }
 }
-
-/* 
-.send-btn {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.add-btn {
-  width: 115px;
-  height: 28px;
-  border: none;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
-} */
