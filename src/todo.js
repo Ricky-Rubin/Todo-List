@@ -100,6 +100,11 @@ window.onload = () => {
                 if (currentContentArea) {
                     currentContentArea.style.display = 'flex';
                 }
+
+                const addTaskBtn = document.getElementById('add-task-btn');
+                if (addTaskBtn) {
+                    addTaskBtn.style.display = 'block'
+                }
             });
         }
     }
@@ -348,7 +353,7 @@ function fillContent() {
     topName.className = 'top-name';
     topName.innerHTML = `
         <p class='top-task'>Tasks: </p>
-        <button class='add-task'>Add Task</button>
+        <button class='add-task' id='add-task-btn'>Add Task</button>
     `;                   
      
     contentPane.append(topName);

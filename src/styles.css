@@ -155,15 +155,6 @@ body {
   background-color: white;
 }
 
-/* .content-container {
-  border: 3px solid;
-} */
-
-/* .content-area {
-  display: flex;
-  border: 3px solid blue;
-} */
-
 .top-task {
   font-size: 45px;
   font-weight: 700;
@@ -348,10 +339,6 @@ textarea {
     padding: 10px 7px 0px 7px;
   }
 
-  .content-area {
-    /* padding: 20px 0px 20px 0px; */
-  }
-
   .top-text-one,
   .top-task {
     font-size: 25px;
@@ -369,6 +356,7 @@ textarea {
 
   .tab-house {
     font-size: 9px;
+    border: 1px solid;
   }
 
   .project-tab {
@@ -455,5 +443,13 @@ textarea {
     height: 23px;
     border-radius: 8px;
     font-size: 10px;
+  }
+
+  .cancel-house {
+    border: 1px solid;
+  }
+
+  .project-cancel {
+    border: 1px solid;
   }
 }
