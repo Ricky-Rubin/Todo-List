@@ -24,4 +24,4 @@ This project is a part of [The Odin Project's Full Stack JavaScript Course](http
 - Build the project for production
 
 ## Live Website
-* Todo-List 
+* [Todo-List](https://ricky-rubin.github.io/Todo-List/).
