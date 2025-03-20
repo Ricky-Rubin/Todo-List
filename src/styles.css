@@ -293,12 +293,12 @@ textarea {
 }
 
 .todo-div {
-  width: 280px;
+  width: 345px;
   border: 3px solid black;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  margin: 0px 12px 20px 12px;
+  margin: 0px 10px 20px 10px;
   font-size: 13px;
   text-align: center;
   padding: 5px 10px;
@@ -500,27 +500,3 @@ textarea {
     margin: 0px 12px 20px 6px;
   }
 }
-
-
-/* #right {
-  padding: 10px 7px 0px 7px;
-  width: 68%;
-  margin-left: 10%;
-}
-
-#left {
-  width: 32%;
-  padding: 10px 7px 0px 7px;
-} */
-
-/* .todo-div {
-  width: 280px;
-  border: 3px solid black;
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  margin: 0px 12px 20px 12px;
-  font-size: 13px;
-  text-align: center;
-  padding: 5px 10px;
-} */
