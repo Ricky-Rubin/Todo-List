@@ -456,3 +456,71 @@ textarea {
     font-size: 10px;
   }
 }
+
+@media (min-width: 715px) and (max-width: 818px) {
+  .todo-div {
+    width: 265px;
+    margin: 0px 12px 16px 2px;
+  }
+}
+
+@media (min-width: 819px) and (max-width: 909px){
+  .todo-div {
+    width: 281px;
+    margin: 0px 12px 20px 6px;
+  }
+}
+
+@media (min-width: 910px) and (max-width: 1020px) {
+  .todo-div {
+    width: 310px;
+    margin: 0px 16px 20px 8px;
+  }
+}
+
+@media (min-width: 1022px) and (max-width: 1275px) {
+  .todo-div {
+    width: 300px;
+    margin: 0px 12px 20px 6px;
+  }
+
+  #right {
+    width: 67%;
+    margin-left: 11%;
+  }
+
+  #left {
+    width: 33%;
+  }
+}
+
+@media (min-width: 1278px) and (max-width: 1350px) {
+  .todo-div {
+    width: 301px;
+    margin: 0px 12px 20px 6px;
+  }
+}
+
+
+/* #right {
+  padding: 10px 7px 0px 7px;
+  width: 68%;
+  margin-left: 10%;
+}
+
+#left {
+  width: 32%;
+  padding: 10px 7px 0px 7px;
+} */
+
+/* .todo-div {
+  width: 280px;
+  border: 3px solid black;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 12px 20px 12px;
+  font-size: 13px;
+  text-align: center;
+  padding: 5px 10px;
+} */
